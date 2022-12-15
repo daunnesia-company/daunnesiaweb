@@ -24,6 +24,7 @@
         "vite": "^3.0.0"
     },
     "dependencies": {
-        "@tailwindcss/typography": "^0.5.8"
+        "@tailwindcss/typography": "^0.5.8",
+        "react-icons": "^4.7.1"
     }
 }
