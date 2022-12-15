@@ -1,3 +1,24 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body {
+    @apply overflow-x-hidden !important;
+}
+
+/* Navbar Component */
+.navbar-glass {
+    @apply bg-white/80 dark:bg-accent/80 backdrop-blur-sm shadow-md dark:shadow-white/10 !important;
+}
+
+.navbar-glass a:hover {
+    @apply bg-opacity-80 !important;
+}
+
+.navbar-ease-in {
+    @apply transition-all duration-[0.3s] ease-in !important;
+}
+
+.navbar-ease-out {
+    @apply transition-all duration-[0.3s] ease-out !important;
+}
