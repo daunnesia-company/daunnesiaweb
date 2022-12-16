@@ -4,6 +4,7 @@
 
 body {
     @apply overflow-x-hidden !important;
+    @apply bg-white dark:bg-accent;
 }
 
 /* Navbar Component */
@@ -16,9 +17,9 @@ body {
 }
 
 .navbar-ease-in {
-    @apply transition-all duration-[0.3s] ease-in !important;
+    /* @apply transition-all duration-[0.3s] ease-in !important; */
 }
 
 .navbar-ease-out {
-    @apply transition-all duration-[0.3s] ease-out !important;
+    /* @apply transition-all duration-[0.3s] ease-out !important; */
 }
