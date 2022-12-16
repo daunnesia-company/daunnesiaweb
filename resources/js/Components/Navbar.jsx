@@ -72,11 +72,11 @@ export default function Navbar(props) {
             className="sticky top-0 bg-white text-accent dark:bg-accent dark:text-accent2 transition-all ease-in-out duration-[0.3s]"
         >
             <div className="max-w-[1440px] m-auto w-full h-20">
-                <div className="flex flex-1 flex-row items-center justify-between w-full h-full px-[36px] md:px-[72px]">
+                <div className="flex flex-1 flex-row items-center justify-between w-full h-full px-9 md:px-20">
                     <article className="prose lg:prose-xl">
-                        <h3 className="text-accent dark:text-accent2 text-sm">
+                        <h4 className="text-accent dark:text-accent2 font-bold">
                             Daunnesia
-                        </h3>
+                        </h4>
                     </article>
                     <div>
                         {/* mobile navbar */}
