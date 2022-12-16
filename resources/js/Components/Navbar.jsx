@@ -69,7 +69,7 @@ export default function Navbar(props) {
     return (
         <nav
             ref={navbarRef}
-            className="sticky top-0 bg-white text-accent dark:bg-accent dark:text-accent2 transition-all ease-in-out duration-[0.3s]"
+            className="sticky top-0 bg-white text-accent dark:bg-accent dark:text-accent2"
         >
             <div className="max-w-[1440px] m-auto w-full h-20">
                 <div className="flex flex-1 flex-row items-center justify-between w-full h-full px-9 md:px-20">
@@ -160,7 +160,7 @@ export default function Navbar(props) {
             <div
                 className={`${
                     navbarToggled ? "absolute" : "hidden"
-                }  transition-all ease-in-out duration-1000 lg:hidden w-screen md:w-[40%] md:right-0 top-24`}
+                } lg:hidden w-screen md:w-[40%] md:right-0 top-24`}
             >
                 <div
                     ref={navbarMenuContainerRef}

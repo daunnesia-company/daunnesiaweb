@@ -60,7 +60,7 @@ const navLinks = [
 
 export default function Footer() {
     return (
-        <footer className="bg-white text-accent dark:bg-accent dark:text-accent2 transition-all ease-in-out duration-[0.3s]">
+        <footer className="bg-white text-accent dark:bg-accent dark:text-accent2">
             <div className="max-w-[1440px] mx-auto w-full">
                 <div className="py-10 md:py-12 lg:py-14 px-9 md:px-20 w-full h-full">
                     <div className="block lg:flex lg:justify-between">
@@ -70,7 +70,7 @@ export default function Footer() {
                                     Daunnesia
                                 </h4>
 
-                                <p className="text-gray dark:text-accent2 text-base">
+                                <p className="hover:text-accent dark:text-accent2 text-base">
                                     Kamu nanyea tagline aku apa? biar aku kasih
                                     tau ya, tagline aku Bersatu kita teguh,
                                     bercerai kita berantakan.
@@ -79,27 +79,22 @@ export default function Footer() {
                         </div>
 
                         <div className="flex flex-wrap mt-6 md:mt-8 lg:mt-0 gap-y-5 lg:w-96 xl:w-1/2 lg:justify-end lg:gap-x-16 xl:gap-x-24">
-                            {navLinks.map((navLink, index) => (
+                            {navLinks.map(({ heading, links }, index) => (
                                 <div
                                     key={index}
                                     className="flex flex-col w-1/2 md:w-1/3 lg:w-auto"
                                 >
                                     <h4 className="text-accent dark:text-accent2 font-bold">
-                                        {navLink.heading}
+                                        {heading}
                                     </h4>
 
                                     <ul>
-                                        {navLink.links.map((link, index) => (
+                                        {links.map(({ href, name }, index) => (
                                             <li
                                                 key={index}
-                                                className="text-gray dark:text-gray text-base mt-4"
+                                                className="text-accent/80 hover:text-accent dark:text-accent2/80 dark:hover:text-accent2 text-base mt-4"
                                             >
-                                                <a
-                                                    href={link.href}
-                                                    className="hover:text-accent dark:hover:text-accent2"
-                                                >
-                                                    {link.name}
-                                                </a>
+                                                <a href={href}>{name}</a>
                                             </li>
                                         ))}
                                     </ul>
