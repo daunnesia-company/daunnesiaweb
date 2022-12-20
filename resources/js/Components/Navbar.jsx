@@ -10,28 +10,27 @@ import { GiHamburgerMenu } from "react-icons/gi";
 
 const navLinks = [
     {
-        name: "Home",
+        label: "Home",
         href: "/home",
     },
     {
-        name: "Materi",
+        label: "Materi",
         href: "/materi",
     },
     {
-        name: "Etalase",
+        label: "Etalase",
         href: "/etalase",
     },
     {
-        name: "About Us",
+        label: "About Us",
         href: "/about",
     },
 ];
 
-export default function Navbar(props) {
-    const { url } = usePage();
+export default function Navbar() {
+    const [navbarMenuToggled, setNavbarMenuToggled] = useState(false);
     const navbarRef = useRef();
     const navbarMenuContainerRef = useRef();
-    const [navbarToggled, setNavbarToggled] = useState(false);
 
     const darkModeTogglerOnClick = () => {
         document.querySelector("html").classList.toggle("dark");
@@ -40,24 +39,12 @@ export default function Navbar(props) {
     useEffect(() => {
         const handleScroll = () => {
             if (scrollY === 0) {
-                navbarRef.current.classList.remove(
-                    "navbar-glass",
-                    "navbar-ease-in"
-                );
-                navbarMenuContainerRef.current.classList.remove(
-                    "navbar-glass",
-                    "navbar-ease-in"
-                );
+                navbarRef.current.classList.remove("navbar-glass");
+                navbarMenuContainerRef.current.classList.remove("navbar-glass");
             }
             if (scrollY > 0) {
-                navbarRef.current.classList.add(
-                    "navbar-glass",
-                    "navbar-ease-in"
-                );
-                navbarMenuContainerRef.current.classList.add(
-                    "navbar-glass",
-                    "navbar-ease-in"
-                );
+                navbarRef.current.classList.add("navbar-glass");
+                navbarMenuContainerRef.current.classList.add("navbar-glass");
             }
         };
 
@@ -95,35 +82,40 @@ export default function Navbar(props) {
                             <button
                                 className="ml-4 text-xl w-[48px] h-[48px] rounded-[5px] border-2 bg-white border-gray text-accent dark:text-accent2 bg-opacity-80 dark:bg-secondary dark:border-secondary dark:bg-opacity-30 flex justify-center items-center"
                                 onClick={() =>
-                                    setNavbarToggled((prev) => !prev)
+                                    setNavbarMenuToggled((prev) => !prev)
                                 }
                             >
                                 <GiHamburgerMenu />
                             </button>
                         </div>
+
+                        {/* mobile navbar links container */}
+                        <div
+                            className={`${
+                                navbarMenuToggled ? "absolute" : "hidden"
+                            } lg:hidden w-screen md:w-[40%] right-0 top-24`}
+                        >
+                            <div
+                                ref={navbarMenuContainerRef}
+                                className="flex flex-col bg-white dark:bg-accent mx-[36px] md:mx-[72px] rounded-md border-gray border-2 dark:border-secondary"
+                            >
+                                {navLinks.map((link, index) => (
+                                    <Navbar.MobileLink key={index} {...link} />
+                                ))}
+                            </div>
+                        </div>
+                        {/* end of mobile navbar link container */}
                         {/* end of mobile navbar */}
 
                         {/* desktop & tablet navbar */}
                         <div className="hidden lg:flex flex-row items-center">
                             {navLinks.map((link, index) => (
-                                <Link
+                                <Navbar.Link
                                     key={index}
-                                    as="a"
-                                    href={link.href}
-                                    className={`relative px-[16px] flex justify-center text-sm group ${
-                                        navLinks.length - 1 === index &&
-                                        "pr-8 border-r-2 group border-accent dark:border-white"
-                                    }`}
-                                >
-                                    {link.name}
-                                    <span
-                                        className={`${
-                                            url === link.href
-                                                ? "visible"
-                                                : "invisible group-hover:visible"
-                                        } absolute rounded-md -bottom-2 w-9 h-[3px] bg-secondary`}
-                                    ></span>
-                                </Link>
+                                    index={index}
+                                    {...link}
+                                    navLinks={navLinks}
+                                />
                             ))}
                             <Link
                                 as="a"
@@ -156,29 +148,47 @@ export default function Navbar(props) {
                     {/* end of desktop & tablet navbar */}
                 </div>
             </div>
-            {/* navbar menu container */}
-            <div
-                className={`${
-                    navbarToggled ? "absolute" : "hidden"
-                } lg:hidden w-screen md:w-[40%] md:right-0 top-24`}
-            >
-                <div
-                    ref={navbarMenuContainerRef}
-                    className="flex flex-col bg-white dark:bg-accent mx-[36px] md:mx-[72px] rounded-md border-gray border-2 dark:border-secondary"
-                >
-                    {navLinks.map((link, index) => (
-                        <Link
-                            key={index}
-                            as="a"
-                            href={link.href}
-                            className={`relative px-[16px] flex justify-center text-sm group py-4 text-center hover:bg-accent hover:text-accent2 dark:hover:bg-primary`}
-                        >
-                            {link.name}
-                        </Link>
-                    ))}
-                </div>
-            </div>
-            {/* end of navbar menu container */}
         </nav>
     );
 }
+
+Navbar.MobileLink = ({ href, label }) => {
+    const { url } = usePage();
+
+    return (
+        <Link
+            as="a"
+            href={href}
+            className={`${
+                url === href
+                    ? "bg-accent text-accent2 dark:bg-primary"
+                    : "hover:bg-accent hover:text-accent2 dark:hover:bg-primary"
+            } relative px-[16px] flex justify-center text-sm group py-4 text-center`}
+        >
+            {label}
+        </Link>
+    );
+};
+
+Navbar.Link = ({ index, href, label, navLinks }) => {
+    const { url } = usePage();
+
+    return (
+        <Link
+            key={index}
+            as="a"
+            href={href}
+            className={`relative px-[16px] flex justify-center text-sm group ${
+                navLinks.length - 1 === index &&
+                "pr-8 border-r-2 group border-accent dark:border-white"
+            }`}
+        >
+            {label}
+            <span
+                className={`${
+                    url === href ? "visible" : "invisible group-hover:visible"
+                } absolute rounded-md -bottom-2 w-9 h-[3px] bg-secondary`}
+            ></span>
+        </Link>
+    );
+};
