@@ -15,11 +15,3 @@ body {
 .navbar-glass a:hover {
     @apply bg-opacity-80 !important;
 }
-
-.navbar-ease-in {
-    /* @apply transition-all duration-[0.3s] ease-in !important; */
-}
-
-.navbar-ease-out {
-    /* @apply transition-all duration-[0.3s] ease-out !important; */
-}
